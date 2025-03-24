@@ -1,7 +1,10 @@
 import React from "react";
-import ServiceCard from "../ServiceCard";
+// import ServiceCard from "../ServiceCard";
 import WhiteServiceCard from "../WhiteServiceCard";
-
+import electricity from "../../assets/electricity.png";
+import data from "../../assets/mobile-data.png";
+import tv from "../../assets/smart-tv.png";
+import airtime from "../../assets/touch.png";
 const Service = () => {
   return (
     <div  className="mx-2 bg-[#E6ECFD] lg:w-[full] lg:h-[
@@ -14,12 +17,15 @@ const Service = () => {
         </p>
         <div className="flex flex-col mx-6 lg:flex lg:flex-row ">
           <div className="flex flex-col  mx-auto gap-8 mb-10  lg:flex lg:flex-col">
-       <ServiceCard title="Airtime Top-up" details="Now, topping up your mobile airtime has never been easier – whether you're on the go or at home. Say goodbye to the hassle of searching for physical recharge cards or dealing with complex codes"/>
-       <WhiteServiceCard title="Electricity Bill" details="Our user-friendly interface allows you to effortlessly access and pay your electricity bills, putting the power of hassle-free transactions in your hands." /> 
+       {/* <ServiceCard title="Airtime Top-up" details="Now, topping up your mobile airtime has never been easier – whether you're on the go or at home. Say goodbye to the hassle of searching for physical recharge cards or dealing with complex codes"/> */}
+       <WhiteServiceCard   
+  
+       image={airtime}  title="Electricity Bill" details="Our user-friendly interface allows you to effortlessly access and pay your electricity bills, putting the power of hassle-free transactions in your hands." />
+       <WhiteServiceCard   image={electricity}  title="Electricity Bill" details="Our user-friendly interface allows you to effortlessly access and pay your electricity bills, putting the power of hassle-free transactions in your hands." />  
       </div>
       <div className="flex flex-col  mx-auto gap-8 mb-4">
-       <WhiteServiceCard title="Data Bundle" details="Experience the convenience of instant data top-ups with Billslink, your go-to VTU and bill payment platform."/> 
-      <WhiteServiceCard title="TV Subscription" details="Our platform seamlessly integrates TV subscription services, allowing you to effortlessly renew and manage your subscriptions with a few clicks."/> 
+       <WhiteServiceCard image={data} title="Data Bundle" details="Experience the convenience of instant data top-ups with Billslink, your go-to VTU and bill payment platform."/> 
+      <WhiteServiceCard image={tv} title="TV Subscription" details="Our platform seamlessly integrates TV subscription services, allowing you to effortlessly renew and manage your subscriptions with a few clicks."/> 
       </div>
     </div>
       </div>

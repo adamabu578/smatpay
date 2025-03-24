@@ -54,6 +54,7 @@ const NewNavbar = ({setScroll, home, service, faq, contact, agent}) => {
             <li onClick={() => setScroll(agent) } className="cursor-pointer text-white py-2 px-4 hover:text-[#38c5ca]">Agent</li>
             <li onClick={() => setScroll(faq) } className="cursor-pointer text-white py-2 px-4 hover:text-[#38c5ca]">Faqs</li>
             <li onClick={() => setScroll(contact) } className="cursor-pointer text-white py-2 px-4 hover:text-[#38c5ca]">Contact</li>
+            <li onClick={() => setScroll(login) } className="cursor-pointer text-white py-2 px-4 hover:text-[#38c5ca]">Login</li>
           
           </ul>
           <button className="flex items-center gap-2 bg-[#FFFFFF] rounded-md px-2 py-2 ">
