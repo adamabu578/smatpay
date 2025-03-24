@@ -13,10 +13,10 @@ Eina01-SemiBold text-[24px]">
           Pay bills on the go
         </h3>
         <div className="flex items-center justify-center gap-4">
-          <img
+          {/* <img
             src={bills}
           className="rounded-[50%] w-[30px]"
-          />
+          /> */}
            <p className="text-[15px] font- 
 Eina01-Regular">
             Experience unparalleled convenience with SmatPay's 'Pay Bills on the

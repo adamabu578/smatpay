@@ -46,15 +46,15 @@ const Footer = () => {
         <a href='facebook' className='text-[#7978ff]   w-[30px]'><img src={media} className='w-[30px]'/></a>
         
         </div>
-          <a href='#' className='text-[#FFFFFF] text-sm hover:text-[#38c5ca]'>Email@smatpay.com</a>
-          <a href='#' className='text-[#FFFFFF] text-sm hover:text-[#38c5ca]'>+234 123 456 7890</a>
+          <a href='#' className='text-[#FFFFFF] text-sm hover:text-[#38c5ca]'>smatvtubiltopup@gmail.com</a>
+          <a href='#' className='text-[#FFFFFF] text-sm hover:text-[#38c5ca]'>+234 8146704074</a>
         </div>
        
 
       </div>
       <div>
         <img src={dash} className='bg-[#7978FF] w-[40px]'/>
-        <p className='text-white px-7 lg:py-3 text-center'>&copy; 2024 SmatPay. All rights reserved.<br/>Designed By Adamu</p>
+        <p className='text-white px-7 lg:py-3 text-center'>&copy; 2024 SmatPay. All rights reserved.<br/></p>
       </div>
     </div>
   )

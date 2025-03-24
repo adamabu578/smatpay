@@ -11,7 +11,7 @@ const Contact = () => {
       <div >
         <h1 className='text-[30px] text-purple-950 font-semibold mx-20 lg:mt-8 lg:text-[48px]'>Let’s get in touch</h1>
         <p className='mx-20 text-[18px]'>We'd love to hear from you! Whether you have questions about our<br/> services, need assistance, or want to explore partnership<br/> opportunities, let's get in touch.</p>
-        <a href='Email us: help@Smatpay.com' className='text-purple-950 mx-20 mt-5 flex justify-start underline'>Email us: help@Smatpay.com</a>
+        <a href='Email us: help@Smatpay.com' className='text-purple-950 mx-20 mt-5 flex justify-start underline'>Email us:smatvtubilltopup@gmail.com</a>
         <a href='Phone number: +234 123 456 7890 ' className='text-purple-950 mx-20  flex justify-start underline'>Phone number: +234 123 456 7890 </a>
         <div className='flex mx-20 gap-2'>
         <a href='facebook' className='text-[#7978ff]   w-[30px]'><img src={facebook}/></a>

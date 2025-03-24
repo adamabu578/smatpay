@@ -71,7 +71,7 @@ const App = () => {
     
         <Qstion/>
         <Billing/>
-        <Contact/>
+        {/* <Contact/> */}
         <Footer/>
   
        

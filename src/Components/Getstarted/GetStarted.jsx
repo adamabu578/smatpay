@@ -1,6 +1,6 @@
 import React from "react";
 import group from "../../assets/Group3.png";
-import space from "../../assets/mockup.png";
+import space from "../../assets/getimg.png";
 import groupimg from "../../assets/Group2.png"
 import person from "../../assets/profile.png"
 const GetStarted = () => {
@@ -64,7 +64,7 @@ const GetStarted = () => {
         <div className="flex flex-col w-[300px] h-[100px] lg:w-full lg:flex lg:flex-row lg:items-center">
           <img
             src={space}
-           className="w-[100] h-[80] lg:w-[623px] lg:h-[676px]"
+           className="w-[100] h-[80] lg:w-[500px] lg:h-[400px]"
           />
         </div>
       </div>
