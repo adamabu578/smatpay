@@ -167,11 +167,7 @@ export default function Login() {
               Create an account
             </a>
           </p>
-          <div className="text-center text-sm text-gray-600 mt-4">
-          <a href="/reset-password" className="text-purple-950 hover:underline">
-             reset-password
-            </a>
-          </div>
+         
         </div>
 
         {/* Right Section - Image */}

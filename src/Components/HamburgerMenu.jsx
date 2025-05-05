@@ -99,6 +99,24 @@ const NewNavbar = ({ setScroll, home, service, faq, contact, agent }) => {
                 Sign-up
               </Link>
             </li>
+            <li>
+            <a
+              href="https://downloads.smatpay.live/smatpay.apk" // Change this to your actual file path or external link
+              download
+              className="bg-purple-700 text-white py-2 px-4 rounded hover:bg-white hover:text-[#38c5ca] transition-all"
+            >
+              Download Now
+            </a>
+          </li>
+
+          <li>
+              <Link
+                to="/reset-password"
+                className="cursor-pointer text-white py-2 px-4 hover:text-[#38c5ca]"
+              >
+               reset-password
+              </Link>
+            </li>
           </ul>
 
         </div>
