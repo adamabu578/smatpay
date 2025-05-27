@@ -109,14 +109,6 @@ const NewNavbar = ({ setScroll, home, service, faq, contact, agent }) => {
             </a>
           </li>
 
-          <li>
-              <Link
-                to="/reset-password"
-                className="cursor-pointer text-white py-2 px-4 hover:text-[#38c5ca]"
-              >
-               reset-password
-              </Link>
-            </li>
           </ul>
 
         </div>

@@ -22,12 +22,24 @@ const Hero = () => {
             Transactions,Anywhere,Anytime!
           </p>
           <div className="mx-8 lg:mx-40 mb-2 flex gap-2 mt-  ">
-            <button className="">
+            {/* <button className="">
               <img src={Google} className="w-[150px] h-[50px]" />
             </button>
             <button>
               <img src={App} className="w-[150px] h-[50px]" />
-            </button>
+            </button> */}
+            <a href="https://downloads.smatpay.live/smatpay.apk">
+             <button className="">
+            <img src={Google} className="w-[150px] h-[50px]" alt="Download on Google Play" />
+           </button>
+          </a>
+
+            <a href="https://downloads.smatpay.live/smatpay.apk">
+              <button>
+              <img src={App} className="w-[150px] h-[50px]" alt="Download on App Store" />
+              </button>
+            </a>
+
           </div>
         </div>
 

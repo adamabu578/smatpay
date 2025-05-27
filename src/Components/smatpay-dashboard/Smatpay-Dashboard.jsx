@@ -9,7 +9,7 @@ export default function ExternalDashboardRedirect() {
     const redirectToDashboard = async () => {
       try {
         // Option 1: Simple redirect to external dashboard
-        window.location.href = "https://dashboard.smatpay.live"
+        window.location.href = "https://smatpay-dashboard.vercel.app/"
 
         // Option 2: Pass token via URL (less secure)
         // const token = localStorage.getItem("authToken");
