@@ -1,10 +1,8 @@
 import { useState } from "react";
-// import Image from "next/image";
-// import logoimg from "@/components/assests/Artboard.svg";
 import google from "../../assets/googlebtn.svg";
 import logoimg from "../../assets/logo.png";
 import backgroundimg from "../../assets/loginimg2.png";
-// import { Eye } from 'lucide-react';
+
 
 export default function Register() {
   const [showPassword, setShowPassword] = useState(false);
