@@ -301,27 +301,36 @@
 // }
 
 
-import { useState, useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom';
-import { Eye, EyeOff, Check, AlertCircle } from 'lucide-react';
+"use client"
+
+import { useState, useEffect } from "react"
+import { useSearchParams, useNavigate } from "react-router-dom"
+import { Eye, EyeOff, Check, AlertCircle } from "lucide-react"
 
 export default function ResetPasswordPage() {
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [resetStatus, setResetStatus] = useState(null); // null, 'success', 'error'
-  const [errorMessage, setErrorMessage] = useState('');
-  const [searchParams] = useSearchParams();
-  const [token, setToken] = useState('');
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
+  const [showPassword, setShowPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [resetStatus, setResetStatus] = useState(null) // null, 'success', 'error'
+  const [errorMessage, setErrorMessage] = useState("")
+  const [token, setToken] = useState("")
+
+  const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   useEffect(() => {
-    const urlToken = searchParams.get('token');
-    if (urlToken) setToken(urlToken);
-  }, [searchParams]);
+    const urlToken = searchParams.get("token")
+    if (urlToken) {
+      setToken(urlToken)
+    }
+    // Remove the else block that was setting error immediately
+  }, [searchParams])
 
-  // Password validation
+  console.log("Token from URL:", token)
+
+  // Password validation states
   const [validations, setValidations] = useState({
     hasMinLength: false,
     hasUppercase: false,
@@ -329,8 +338,9 @@ export default function ResetPasswordPage() {
     hasNumber: false,
     hasSpecialChar: false,
     passwordsMatch: false,
-  });
+  })
 
+  // Validate password on change
   useEffect(() => {
     setValidations({
       hasMinLength: password.length >= 8,
@@ -338,61 +348,83 @@ export default function ResetPasswordPage() {
       hasLowercase: /[a-z]/.test(password),
       hasNumber: /[0-9]/.test(password),
       hasSpecialChar: /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/.test(password),
-      passwordsMatch: password === confirmPassword && password !== '',
-    });
-  }, [password, confirmPassword]);
+      passwordsMatch: password === confirmPassword && password !== "",
+    })
+  }, [password, confirmPassword])
 
-  const isFormValid = Object.values(validations).every(Boolean);
-
-  const ResetPassword = async () => {
-    const response = await fetch("https://smatpay.live/api/reset-password", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token, password }),
-    });
-
-    const json = await response.json();
-
-    if (!response.ok) {
-      throw new Error(json.message || 'Reset password failed');
-    }
-
-    return json;
-  };
+  const isFormValid = Object.values(validations).every(Boolean)
 
   const handleSubmit = async () => {
     if (!isFormValid) {
-      setErrorMessage('Please fix the validation errors before submitting.');
-      setResetStatus('error');
-      return;
+      setErrorMessage("Please fix the validation errors before submitting.")
+      setResetStatus("error")
+      return
     }
 
+    // Check for token only when user tries to submit
     if (!token) {
-      setErrorMessage('Invalid or missing token.');
-      setResetStatus('error');
-      return;
+      setErrorMessage("Invalid or missing reset token. Please check your email link.")
+      setResetStatus("error")
+      return
     }
 
-    setIsSubmitting(true);
-    setResetStatus(null);
+    setIsSubmitting(true)
+    setResetStatus(null)
 
     try {
-      await ResetPassword();
-      setResetStatus('success');
-      setPassword('');
-      setConfirmPassword('');
+      const response = await fetch("https://smatpay.live/api/reset-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          token: token,
+          password: password, // Use actual password from form, not hardcoded
+        }),
+      })
+
+      const json = await response.json()
+
+      if (response.ok) {
+        console.log("Password reset successful:", json)
+        setResetStatus("success")
+        setPassword("")
+        setConfirmPassword("")
+      } else {
+        console.error("Password reset failed:", json.message || json)
+        setErrorMessage(json.message || "Password reset failed. Please try again.")
+        setResetStatus("error")
+      }
     } catch (error) {
-      setResetStatus('error');
-      setErrorMessage(error.message || 'An error occurred while resetting your password.');
+      console.error("Error during password reset:", error)
+      setResetStatus("error")
+      setErrorMessage("An error occurred while resetting your password. Please try again.")
     } finally {
-      setIsSubmitting(false);
+      setIsSubmitting(false)
     }
-  };
+  }
 
   const handleTryAgain = () => {
-    setResetStatus(null);
-    setErrorMessage('');
-  };
+    setResetStatus(null)
+    setErrorMessage("")
+  }
+
+  const handleReturnToLogin = () => {
+    navigate("/login") // Adjust this path as needed
+  }
+
+  // Add this new useEffect after the existing ones
+  useEffect(() => {
+    // Check for token after component mounts, with a small delay
+    const timer = setTimeout(() => {
+      if (!token && !searchParams.get("token")) {
+        setErrorMessage("No reset token found. Please use the link from your email.")
+        setResetStatus("error")
+      }
+    }, 1000) // 1 second delay
+
+    return () => clearTimeout(timer)
+  }, [token, searchParams])
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
@@ -403,38 +435,47 @@ export default function ResetPasswordPage() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-purple-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          {resetStatus === 'success' ? (
+          {resetStatus === "success" ? (
             <div className="rounded-md bg-green-50 p-4 mb-4">
               <div className="flex">
-                <div className="flex-shrink-0"><Check className="h-5 w-5 text-green-400" /></div>
+                <div className="flex-shrink-0">
+                  <Check className="h-5 w-5 text-green-400" />
+                </div>
                 <div className="ml-3">
                   <h3 className="text-sm font-medium text-green-800">Password reset successful</h3>
-                  <p className="mt-2 text-sm text-green-700">You can now log in with your new password.</p>
+                  <div className="mt-2 text-sm text-green-700">
+                    <p>Your password has been reset successfully. You can now log in with your new password.</p>
+                  </div>
                   <div className="mt-4">
-                    <a
-                      href="/login"
+                    <button
+                      type="button"
+                      onClick={handleReturnToLogin}
                       className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                     >
                       Return to login
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           ) : (
             <div className="space-y-6">
-              {resetStatus === 'error' && (
+              {resetStatus === "error" && (
                 <div className="rounded-md bg-red-50 p-4">
                   <div className="flex">
-                    <div className="flex-shrink-0"><AlertCircle className="h-5 w-5 text-red-400" /></div>
+                    <div className="flex-shrink-0">
+                      <AlertCircle className="h-5 w-5 text-red-400" />
+                    </div>
                     <div className="ml-3">
                       <h3 className="text-sm font-medium text-red-800">Error</h3>
-                      <p className="mt-2 text-sm text-red-700">{errorMessage}</p>
+                      <div className="mt-2 text-sm text-red-700">
+                        <p>{errorMessage}</p>
+                      </div>
                       <div className="mt-4">
                         <button
                           type="button"
                           onClick={handleTryAgain}
-                          className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                          className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
                         >
                           Try again
                         </button>
@@ -444,78 +485,120 @@ export default function ResetPasswordPage() {
                 </div>
               )}
 
-              {/* Password Inputs */}
-              {['password', 'confirmPassword'].map((field) => (
-                <div key={field}>
-                  <label htmlFor={field} className="block text-sm font-medium text-white">
-                    {field === 'password' ? 'New Password' : 'Confirm Password'}
-                  </label>
-                  <div className="mt-1 relative rounded-md shadow-sm">
-                    <input
-                      id={field}
-                      name={field}
-                      type={
-                        field === 'password'
-                          ? showPassword ? 'text' : 'password'
-                          : showConfirmPassword ? 'text' : 'password'
-                      }
-                      value={field === 'password' ? password : confirmPassword}
-                      onChange={(e) =>
-                        field === 'password' ? setPassword(e.target.value) : setConfirmPassword(e.target.value)
-                      }
-                      required
-                      className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                      placeholder={field === 'password' ? 'Enter your new password' : 'Confirm your new password'}
-                    />
-                    <button
-                      type="button"
-                      className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-500"
-                      onClick={() =>
-                        field === 'password' ? setShowPassword(!showPassword) : setShowConfirmPassword(!showConfirmPassword)
-                      }
-                    >
-                      {(field === 'password' ? showPassword : showConfirmPassword) ? (
-                        <EyeOff className="h-5 w-5" />
-                      ) : (
-                        <Eye className="h-5 w-5" />
-                      )}
-                    </button>
-                  </div>
+              <div>
+                <label htmlFor="password" className="block text-sm font-medium text-white">
+                  New Password
+                </label>
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <input
+                    id="password"
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    placeholder="Enter your new password"
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-500"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  </button>
                 </div>
-              ))}
+              </div>
 
-              {/* Validation */}
+              <div>
+                <label htmlFor="confirmPassword" className="block text-sm font-medium text-white">
+                  Confirm Password
+                </label>
+                <div className="mt-1 relative rounded-md shadow-sm">
+                  <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    type={showConfirmPassword ? "text" : "password"}
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                    placeholder="Confirm your new password"
+                  />
+                  <button
+                    type="button"
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-500"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                  >
+                    {showConfirmPassword ? <EyeOff className="h-5 w-5" /> : <Eye className="h-5 w-5" />}
+                  </button>
+                </div>
+              </div>
+
               <div className="rounded-md bg-gray-50 p-4">
                 <h4 className="text-sm font-medium text-gray-900 mb-2">Password requirements:</h4>
                 <ul className="space-y-1 text-sm">
-                  {[
-                    ['At least 8 characters', validations.hasMinLength],
-                    ['At least 1 uppercase letter', validations.hasUppercase],
-                    ['At least 1 lowercase letter', validations.hasLowercase],
-                    ['At least 1 number', validations.hasNumber],
-                    ['At least 1 special character', validations.hasSpecialChar],
-                    ['Passwords match', validations.passwordsMatch],
-                  ].map(([text, valid]) => (
-                    <li key={text} className="flex items-center">
-                      <span className={`mr-2 ${valid ? 'text-green-500' : 'text-gray-400'}`}>
-                        {valid ? <Check className="h-4 w-4" /> : '○'}
-                      </span>
-                      <span className={valid ? 'text-gray-900' : 'text-gray-500'}>{text}</span>
-                    </li>
-                  ))}
+                  <li className="flex items-center">
+                    <span className={`mr-2 ${validations.hasMinLength ? "text-green-500" : "text-gray-400"}`}>
+                      {validations.hasMinLength ? <Check className="h-4 w-4" /> : "○"}
+                    </span>
+                    <span className={validations.hasMinLength ? "text-gray-900" : "text-gray-500"}>
+                      At least 8 characters
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className={`mr-2 ${validations.hasUppercase ? "text-green-500" : "text-gray-400"}`}>
+                      {validations.hasUppercase ? <Check className="h-4 w-4" /> : "○"}
+                    </span>
+                    <span className={validations.hasUppercase ? "text-gray-900" : "text-gray-500"}>
+                      At least 1 uppercase letter
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className={`mr-2 ${validations.hasLowercase ? "text-green-500" : "text-gray-400"}`}>
+                      {validations.hasLowercase ? <Check className="h-4 w-4" /> : "○"}
+                    </span>
+                    <span className={validations.hasLowercase ? "text-gray-900" : "text-gray-500"}>
+                      At least 1 lowercase letter
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className={`mr-2 ${validations.hasNumber ? "text-green-500" : "text-gray-400"}`}>
+                      {validations.hasNumber ? <Check className="h-4 w-4" /> : "○"}
+                    </span>
+                    <span className={validations.hasNumber ? "text-gray-900" : "text-gray-500"}>At least 1 number</span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className={`mr-2 ${validations.hasSpecialChar ? "text-green-500" : "text-gray-400"}`}>
+                      {validations.hasSpecialChar ? <Check className="h-4 w-4" /> : "○"}
+                    </span>
+                    <span className={validations.hasSpecialChar ? "text-gray-900" : "text-gray-500"}>
+                      At least 1 special character
+                    </span>
+                  </li>
+                  <li className="flex items-center">
+                    <span className={`mr-2 ${validations.passwordsMatch ? "text-green-500" : "text-gray-400"}`}>
+                      {validations.passwordsMatch ? <Check className="h-4 w-4" /> : "○"}
+                    </span>
+                    <span className={validations.passwordsMatch ? "text-gray-900" : "text-gray-500"}>
+                      Passwords match
+                    </span>
+                  </li>
                 </ul>
               </div>
 
-              {/* Submit */}
               <div>
                 <button
                   type="button"
                   onClick={handleSubmit}
                   disabled={isSubmitting || !isFormValid}
-                  className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white
-                  ${isFormValid ? 'bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500' : 'bg-blue-300 cursor-not-allowed'}`}
+                  className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white ${
+                    isFormValid && !isSubmitting
+                      ? "bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+                      : "bg-blue-300 cursor-not-allowed"
+                  }`}
                 >
-                  {isSubmitting ? 'Resetting...' : 'Reset Password'}
+                  {isSubmitting ? "Resetting..." : "Reset Password"}
                 </button>
               </div>
             </div>
@@ -523,5 +606,5 @@ export default function ResetPasswordPage() {
         </div>
       </div>
     </div>
-  );
+  )
 }
