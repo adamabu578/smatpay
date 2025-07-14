@@ -26,7 +26,7 @@ export default function ResetPasswordPage() {
 
 
 
-  //reset password logic
+  //reset password Logic
   const ResetPassword = async () => {
     try {
       const response = await fetch("https://smatpay.live/api/reset-password", {
