@@ -37,6 +37,7 @@ export default function ResetPasswordPage() {
       console.error("Password does not meet requirements or does not match.");
       return;
     }
+    setIsSubmitting(true);
     try {
       const response = await fetch("https://smatpay.live/api/reset-password", {
         method: "POST",
@@ -59,6 +60,8 @@ export default function ResetPasswordPage() {
       }
     } catch (error) {
       console.error("Error during reset-password:", error);
+    }finally {
+      setIsSubmitting(false);
     }
   };
   
@@ -87,37 +90,6 @@ export default function ResetPasswordPage() {
   }, [password, confirmPassword]);
 
   const isFormValid = Object.values(validations).every(Boolean);
-
-  const handleSubmit = async () => {
-    if (!isFormValid) {
-      setErrorMessage('Please fix the validation errors before submitting.');
-      setResetStatus('error');
-      return;
-    }
-
-    if (!token) {
-      setErrorMessage('Invalid or missing token.');
-      setResetStatus('error');
-      return;
-    }
-
-    setIsSubmitting(true);
-    setResetStatus(null);
-
-    try {
-      // Example: Make real API call using `token`, `password`
-      await new Promise((resolve) => setTimeout(resolve, 1500));
-
-      setResetStatus('success');
-      setPassword('');
-      setConfirmPassword('');
-    } catch (error) {
-      setResetStatus('error');
-      setErrorMessage('An error occurred while resetting your password. Please try again.');
-    } finally {
-      setIsSubmitting(false);
-    }
-  };
 
   const handleTryAgain = () => {
     setResetStatus(null);
