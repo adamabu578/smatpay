@@ -28,6 +28,15 @@ export default function ResetPasswordPage() {
 
   //reset password Logic
   const ResetPassword = async () => {
+    if (!token) {
+      console.error("Token is required for password reset.");
+      return;
+    }
+
+    if (password.length < 8 || password !== confirmPassword) {
+      console.error("Password does not meet requirements or does not match.");
+      return;
+    }
     try {
       const response = await fetch("https://smatpay.live/api/reset-password", {
         method: "POST",
@@ -282,7 +291,7 @@ export default function ResetPasswordPage() {
               <div>
                 <button
                   type="button"
-                  onClick={handleSubmit}
+                  onClick={ResetPassword}
                   disabled={isSubmitting || !isFormValid}
                   className={`w-full flex justify-center py-2 px-4 hover:bg-purple-700  border border-transparent rounded-md shadow-sm text-sm font-medium text-white 
                   ${isFormValid 
