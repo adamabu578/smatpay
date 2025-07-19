@@ -39,7 +39,7 @@ export default function ResetPasswordPage() {
     }
     setIsSubmitting(true);
     try {
-      const response = await fetch("https://smatpay.live/api/reset-password", {
+      const response = await fetch("https://smatpay.live/api/forgot-password", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,9 @@ export default function ResetPasswordPage() {
       const json = await response.json();
   
       if (response.ok) {
-        console.log("reset-password successful:", json);
+        console.log("reset-password successful:", json.msg);
+        setResetStatus('success');
+        // window.location.href = '/login'; // Redirect to login page after successful reset
         // You can redirect user or show success message here
       } else {
         console.error("reset-password failed:", json.message || json);
