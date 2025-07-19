@@ -59,6 +59,7 @@ export default function ResetPasswordPage() {
         // You can redirect user or show success message here
       } else {
         console.error("reset-password failed:", json.message || json);
+        setResetStatus('error');
       }
     } catch (error) {
       console.error("Error during reset-password:", error);
@@ -118,16 +119,16 @@ export default function ResetPasswordPage() {
                 <div className="ml-3">
                   <h3 className="text-sm font-medium text-green-800">Password reset successful</h3>
                   <div className="mt-2 text-sm text-green-700">
-                    <p>Your password has been reset successfully. You can now log in with your new password.</p>
+                    <p>Your password has been reset successfully. You can now log in with your new password on the mobile app.</p>
                   </div>
-                  <div className="mt-4">
+                  {/* <div className="mt-4">
                     <button
                       type="button"
                       className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500"
                     >
                       Return to login
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
