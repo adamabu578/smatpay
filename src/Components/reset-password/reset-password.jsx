@@ -39,9 +39,9 @@ export default function ResetPasswordPage() {
     }
     setIsSubmitting(true);
     try {
-      const response = await fetch("https://api.smatpay.live/forgot-password", {
+      const response = await fetch("https://api.smatpay.live/reset-password", {
         method: "POST",
-        credentials: "same-origin",
+        // credentials: "same-origin",
         headers: {
           "Content-Type": "application/json",
         },
