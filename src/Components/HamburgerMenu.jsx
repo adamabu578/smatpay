@@ -101,7 +101,7 @@ const NewNavbar = ({ setScroll, home, service, faq, contact, agent }) => {
             </li>
             <li>
             <a
-              href="https://downloads.smatpay.live/smatpay.apk" // Change this to your actual file path or external link
+              href="/smatpay.apk" // Change this to your actual file path or external link
               download
               className="bg-purple-700 text-white py-2 px-4 rounded hover:bg-white hover:text-[#38c5ca] transition-all"
             >
