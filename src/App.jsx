@@ -6,6 +6,7 @@ import Pages from "./pages.jsx";
 import ProtectedRoutes from "./Components/utils/ProtectedRoutes.jsx";
 import ExternalDashboardRedirect from "./Components/smatpay-dashboard/Smatpay-Dashboard.jsx";
 import ResetPasswordPage from "./Components/reset-password/reset-password.jsx";
+import EmailVerificationPage from "./Components/verify-email/verify-email.jsx";
 
 
 
@@ -25,6 +26,7 @@ const App = () => {
       <Route element={<Login />} path="/login"  />
       <Route element={<Register />} path="/Sign-Up" />
       <Route element={<ResetPasswordPage />} path="/reset-password" />
+       <Route element={<EmailVerificationPage />} path="/verify-email" />
       <Route element={<ExternalDashboardRedirect />} path="/dashboard" />
 
    </Route>

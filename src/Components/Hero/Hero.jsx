@@ -28,13 +28,13 @@ const Hero = () => {
             <button>
               <img src={App} className="w-[150px] h-[50px]" />
             </button> */}
-            <a href="https://downloads.smatpay.live/smatpay.apk">
+            <a href="/smatpay.apk">
              <button className="">
             <img src={Google} className="w-[150px] h-[50px]" alt="Download on Google Play" />
            </button>
           </a>
 
-            <a href="https://downloads.smatpay.live/smatpay.apk">
+            <a href="/smatpay.apk">
               <button>
               <img src={App} className="w-[150px] h-[50px]" alt="Download on App Store" />
               </button>
