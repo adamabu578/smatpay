@@ -61,15 +61,15 @@ export default function Login() {
 
   return (
     <div className="flex items-center justify-center w-[790px] absolute -inset-9 mx-auto">
-      <div className="flex w-full bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="flex w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transition-colors duration-300">
         {/* Left Section */}
         <div className="flex flex-col w-1/2 p-8">
           <div className="flex flex-col items-center mb-6">
             <div className="w-16 h-16 mb-4 flex items-center justify-center">
               <img src={logoimg || "/placeholder.svg"} alt="Logo" width={64} height={64} />
             </div>
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">Sign In</h1>
-            <p className="text-gray-600">Welcome back! Please sign in to continue.</p>
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Sign In</h1>
+            <p className="text-gray-600 dark:text-gray-400">Welcome back! Please sign in to continue.</p>
           </div>
 
           {error && (
@@ -97,7 +97,7 @@ export default function Login() {
               <input
                 type="email"
                 placeholder="Email"
-                className="w-full h-[40px] p-3 border border-gray-300 rounded-full"
+                className="w-full h-[40px] p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -108,7 +108,7 @@ export default function Login() {
               <input
                 type={showPassword ? "text" : "password"}
                 placeholder="Password"
-                className="w-full h-[40px] p-3 border border-gray-300 rounded-full"
+                className="w-full h-[40px] p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -123,11 +123,11 @@ export default function Login() {
             </div>
 
             <div className="flex items-center justify-between mb-4">
-              <label className="flex items-center text-sm text-gray-600">
+              <label className="flex items-center text-sm text-gray-600 dark:text-gray-400">
                 <input type="checkbox" className="mr-2" />
                 Remember me
               </label>
-              <a href="#" className="text-sm text-purple-950 hover:underline">
+              <a href="#" className="text-sm text-purple-950 dark:text-primary-light hover:underline">
                 Forgot password?
               </a>
             </div>
@@ -141,9 +141,9 @@ export default function Login() {
             </button>
           </form>
 
-          <p className="text-center text-sm text-gray-600 mt-4">
+          <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
             Not registered yet?{" "}
-            <a href="/Sign-Up" className="text-purple-950 hover:underline">
+            <a href="/Sign-Up" className="text-purple-950 dark:text-primary-light hover:underline">
               Create an account
             </a>
           </p>

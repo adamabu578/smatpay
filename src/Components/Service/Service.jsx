@@ -5,68 +5,62 @@ import electricity from "../../assets/electricity.png";
 import data from "../../assets/mobile-data.png";
 import tv from "../../assets/smart-tv.png";
 import airtime from "../../assets/touch.png";
+
 const Service = () => {
+  const services = [
+    {
+      title: "Airtime Top-up",
+      image: airtime,
+      details: "Top up your mobile airtime easily. Whether you're on the go or at home, say goodbye to scratch cards."
+    },
+    {
+      title: "Electricity Bill",
+      image: electricity,
+      details: "Effortlessly access and pay your electricity bills. Power your home without the hassle of queues."
+    },
+    {
+      title: "Data Bundle",
+      image: data,
+      details: "Instant data top-ups for all networks. Stay connected with our reliable and fast data services."
+    },
+    {
+      title: "TV Subscription",
+      image: tv,
+      details: "Seamlessly renew your TV subscriptions. Never miss your favorite shows with our quick payment system."
+    }
+  ];
+
   return (
-    <div  className="mx-2 bg-[#E6ECFD] lg:w-[full] lg:h-[
-1600px] ">
-      <div className="text-center  ">
-        <h3 className="text-[#1B1F23] font-semibold weight-400 text-[40px] pt-4 mb-2">Our Services</h3>
-        <p className="text-[20px] mb-8">
-          Our comprehensive suite of services encompasses seamless VTU
-          transactions
-        </p>
-        <div className="flex flex-col mx-6 lg:flex lg:flex-row ">
-          <div className="flex flex-col  mx-auto gap-8 mb-10  lg:flex lg:flex-col">
-       {/* <ServiceCard title="Airtime Top-up" details="Now, topping up your mobile airtime has never been easier – whether you're on the go or at home. Say goodbye to the hassle of searching for physical recharge cards or dealing with complex codes"/> */}
-       <WhiteServiceCard   
-  
-       image={airtime}  title="Electricity Bill" details="Our user-friendly interface allows you to effortlessly access and pay your electricity bills, putting the power of hassle-free transactions in your hands." />
-       <WhiteServiceCard   image={electricity}  title="Electricity Bill" details="Our user-friendly interface allows you to effortlessly access and pay your electricity bills, putting the power of hassle-free transactions in your hands." />  
+    <div className="py-20 lg:py-32 bg-neutral-light dark:bg-gray-900 transition-colors duration-300 relative">
+      {/* Background blobs */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+        <div className="absolute top-10 left-10 w-64 h-64 bg-secondary/10 dark:bg-secondary/20 rounded-full blur-3xl mix-blend-multiply" />
+        <div className="absolute bottom-10 right-10 w-80 h-80 bg-primary/5 dark:bg-primary/10 rounded-full blur-3xl mix-blend-multiply" />
       </div>
-      <div className="flex flex-col  mx-auto gap-8 mb-4">
-       <WhiteServiceCard image={data} title="Data Bundle" details="Experience the convenience of instant data top-ups with Billslink, your go-to VTU and bill payment platform."/> 
-      <WhiteServiceCard image={tv} title="TV Subscription" details="Our platform seamlessly integrates TV subscription services, allowing you to effortlessly renew and manage your subscriptions with a few clicks."/> 
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="text-center max-w-3xl mx-auto mb-16">
+          <span className="text-secondary dark:text-secondary-light font-semibold tracking-wider uppercase text-sm">What we offer</span>
+          <h2 className="text-3xl lg:text-4xl font-bold text-neutral-dark dark:text-white mt-2 mb-4">
+            Our Services
+          </h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300">
+            Our comprehensive suite of services encompasses seamless VTU transactions and bill payments.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {services.map((service, index) => (
+            <WhiteServiceCard
+              key={index}
+              image={service.image}
+              title={service.title}
+              details={service.details}
+            />
+          ))}
+        </div>
       </div>
     </div>
-      </div>
-      
-        {/* <div className="bg-[#FFFFFF] rounded-md w-full h-60 px-4">
-          <h3 className="font-semibold font-[#1B1F23] mt-4">
-            Data Bundle Top-up
-          </h3>
-          <p
-            className="font-[#1B1F23] font-
-Eina01-Regular"
-          >
-            Experience the convenience of instant data top-ups with Smatpay,
-            your go-to VTU and bill payment platform.
-          </p>
-        </div>
-        <div className="bg-[#FFFFFF] rounded-md w-full h-60 px-4 mx-4">
-          <h3 className="font-semibold font-[#1B1F23] mt-4">
-            Electricity Bill
-          </h3>
-          <p
-            className="font-[#1B1F23] font-
-Eina01-Regular"
-          >
-            Our user-friendly interface allows you to effortlessly access and
-            pay your electricity bills, putting the power of hassle-free
-            transactions in your hands.
-          </p>
-        </div>
-        <div className="bg-[#FFFFFF] rounded-md w-full h-60 px-4 mx-4">
-          <h3 className="font-semibold mt-4">TV Subscription</h3>
-          <p
-            className="font-
-Eina01-Regular "
-          >
-            Our platform seamlessly integrates TV subscription services,
-            allowing you to effortlessly renew and manage your subscriptions
-            with a few clicks.
-          </p>
-        </div> */}
-      </div>
   );
 };
 

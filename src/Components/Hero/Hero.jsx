@@ -8,45 +8,50 @@ import HamburgerMenu from "../HamburgerMenu";
 
 const Hero = () => {
   return (
-    <div className="relative bg-purple-950 w-full lg:h-[711px]">
-      {/* <Navbar /> */}
-      {/* <HamburgerMenu /> */}
-      <div className="flex flex-col items-center lg:flex-row">
-        <div className="text-center lg:text-left mx-6 lg:mx-40">
-          <img src={wallet} className="w-40 h-30" />
-          <h1 className="text-[28px] lg:text-[40px] xl:text-[54px] font-bold text-[#FFFFFF] font-Eina01-Regular ">
-            Manage and Pay All Your Bills,<br></br>From One Place!
-          </h1>
-          <p className="text-[#FFFFFF] text-[20px] text-lg font-Eina01-Regular my-8 ">
-            Your Trusted VTU and Bill Payment Platform for Quick Seamless<br></br>
-            Transactions,Anywhere,Anytime!
-          </p>
-          <div className="mx-8 lg:mx-40 mb-2 flex gap-2 mt-  ">
-            {/* <button className="">
-              <img src={Google} className="w-[150px] h-[50px]" />
-            </button>
-            <button>
-              <img src={App} className="w-[150px] h-[50px]" />
-            </button> */}
-            <a href="/smatpay.apk">
-             <button className="">
-            <img src={Google} className="w-[150px] h-[50px]" alt="Download on Google Play" />
-           </button>
-          </a>
+    <div className="relative w-full bg-white dark:bg-gray-900 transition-colors duration-300 overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-1/2 h-full bg-secondary/20 dark:bg-secondary/5 rounded-bl-[100px] -z-10 hidden lg:block" />
+      <div className="absolute top-20 right-20 w-64 h-64 bg-primary/5 dark:bg-primary/10 rounded-full blur-3xl -z-10" />
 
-            <a href="/smatpay.apk">
-              <button>
-              <img src={App} className="w-[150px] h-[50px]" alt="Download on App Store" />
-              </button>
-            </a>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-10 pb-20 lg:pt-20 lg:pb-32">
+        <div className="flex flex-col lg:flex-row items-center gap-12">
+          {/* Text Content */}
+          <div className="flex-1 text-center lg:text-left space-y-8">
 
+            <h1 className="text-4xl lg:text-6xl font-bold text-neutral-dark dark:text-white leading-tight mt-12 lg:mt-0">
+              Manage and Pay <br />
+              <span className="text-primary dark:text-primary-light">All Your Bills,</span> <br />
+              From One Place!
+            </h1>
+            <p className="text-lg lg:text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto lg:mx-0">
+              Your Trusted VTU and Bill Payment Platform for Quick
+              Seamless Transactions, Anywhere, Anytime!
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 items-center justify-center lg:justify-start">
+              <a href="/smatpay.apk" className="hover:opacity-80 transition-opacity">
+                <img src={Google} className="h-14 w-auto" alt="Download on Google Play" />
+              </a>
+              <a href="/smatpay.apk" className="hover:opacity-80 transition-opacity">
+                <img src={App} className="h-14 w-auto" alt="Download on App Store" />
+              </a>
+            </div>
           </div>
-        </div>
 
-        <div className="static lg:absolute lg:bottom-0 lg:right-12">
-          <img
-            src={smart} width={539}
-          />
+          {/* Image Content */}
+          <div className="flex-1 relative">
+            <div className="relative z-10 mx-auto w-full max-w-[500px]">
+              <img
+                src={smart}
+                alt="SmatPay App Mockup"
+                className="w-full h-auto drop-shadow-2xl hover:scale-105 transition-transform duration-500"
+              />
+              {/* Floating Element - Optional if you have wallet gif or similar */}
+              {/* <img src={wallet} className="absolute -bottom-10 -left-10 w-24 h-24 animate-bounce hover:animate-none" alt="Wallet" /> */}
+            </div>
+            {/* Decorative circle behind phone */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-secondary/30 rounded-full blur-2xl -z-10" />
+          </div>
         </div>
       </div>
     </div>

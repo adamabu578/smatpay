@@ -15,16 +15,16 @@ export default function Register() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-         "firstName": "Abu", 
-         "lastName": "Adamu",
-         "email": "abukamsulum01@gmail.com",
-         "phone": "08146704074",
-        "password": "Adamskams4670",
+          "firstName": "Abu",
+          "lastName": "Adamu",
+          "email": "abukamsulum01@gmail.com",
+          "phone": "08146704074",
+          "password": "Adamskams4670",
         }),
       });
-  
+
       const json = await response.json();
-  
+
       if (response.ok) {
         console.log("Signup successful:", json);
         // You can redirect user or show success message here
@@ -35,29 +35,29 @@ export default function Register() {
       console.error("Error during signup:", error);
     }
   };
-  
+
 
 
 
   return (
     <div className=" flex items-center justify-center  w-[790px] absolute -inset-9 mx-auto">
       {/* Card Container */}
-      <div className="flex w-full bg-white shadow-lg rounded-lg overflow-hidden">
+      <div className="flex w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg overflow-hidden transition-colors duration-300">
         {/* Left Section - Login */}
         <div className="flex flex-col w-1/2 p-8">
           <div className="flex flex-col items-center mb-6">
             {/* Logo */}
             <div className="w-16 h-16 mb-4 flex items-center justify-center">
-               <img src={logoimg} alt="Logo" width={64} height={64} />
+              <img src={logoimg} alt="Logo" width={64} height={64} />
             </div>
             {/* Header */}
-            <h1 className="text-2xl font-bold text-gray-800 mb-2">Sign up</h1>
-            <p className="text-gray-600">Welcome back! Please sign Up to continue.</p>
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-white mb-2">Sign up</h1>
+            <p className="text-gray-600 dark:text-gray-400">Welcome back! Please sign Up to continue.</p>
           </div>
 
           {/* Sign In with Google */}
           <button className="w-full bg-green-950 text-white py-2 rounded-full font-medium mt-4 flex items-center justify-center space-x-2 hover:bg-green-400">
-             <img src={google} alt="Google" className="w-5" /> 
+            <img src={google} alt="Google" className="w-5" />
             <span></span>Sign up with Google
           </button>
 
@@ -73,7 +73,7 @@ export default function Register() {
             <input
               type="text"
               placeholder="Name"
-              className="w-full h-[40px] p-3 border border-gray-300 rounded-full"
+              className="w-full h-[40px] p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50"
             />
           </div>
 
@@ -81,7 +81,7 @@ export default function Register() {
             <input
               type="email"
               placeholder="Email"
-              className="w-full h-[40px] p-3 border border-gray-300 rounded-full"
+              className="w-full h-[40px] p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50"
             />
           </div>
 
@@ -90,7 +90,7 @@ export default function Register() {
             <input
               type={showPassword ? "text" : "password"}
               placeholder="Password"
-              className="w-full h-[40px] p-3 border border-gray-300 rounded-full"
+              className="w-full h-[40px] p-3 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-full focus:outline-none focus:ring-2 focus:ring-primary/50"
             />
             <button
               type="button"
@@ -98,13 +98,13 @@ export default function Register() {
               onClick={() => setShowPassword(!showPassword)}
             >
               {/* Add an eye icon here */}
-               {/* <Eye />   */}
+              {/* <Eye />   */}
             </button>
           </div>
 
           {/* Remember Me & Forgot Password */}
           <div className="flex items-center justify-between mb-4">
-            <label className="flex items-center text-sm text-gray-600">
+            <label className="flex items-center text-sm text-gray-600 dark:text-gray-400">
               <input type="checkbox" className="mr-2" />
               I agree to the Terms & condition
             </label>
@@ -112,15 +112,15 @@ export default function Register() {
 
           {/* Login Button */}
           <button className="w-full px-4 py-2 text-white bg-green-950 rounded-full hover:bg-green-400"
-          
-          onClick={handleSignup}>
-           Sign up
+
+            onClick={handleSignup}>
+            Sign up
           </button>
 
           {/* Footer */}
-          <p className="text-center text-sm text-gray-600 mt-4">
+          <p className="text-center text-sm text-gray-600 dark:text-gray-400 mt-4">
             Already have an account?
-            <a href="/login" className="text-purple-950 hover:underline">
+            <a href="/login" className="text-purple-950 dark:text-primary-light hover:underline ml-1">
               signin
             </a>
           </p>

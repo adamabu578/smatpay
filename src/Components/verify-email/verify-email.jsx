@@ -16,7 +16,7 @@ export default function EmailVerificationPage() {
           <div className="mb-8">
             <div className="inline-flex items-center gap-2 font-bold text-xl" style={{ color: "#1A123B" }}>
               {/* <Mail className="w-6 h-6" /> */}
-                <img src={smatpaylogo} alt="" className="w-20 rounded-md"/>
+              <img src={smatpaylogo} alt="" className="w-20 rounded-lg" />
               {/* SmatPay */}
             </div>
           </div>

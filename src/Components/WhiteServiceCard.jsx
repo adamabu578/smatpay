@@ -2,22 +2,22 @@ import React from "react";
 
 const WhiteServiceCard = ({ title, details, image }) => {
   return (
-    <div>
-      <div
-        className="bg-[#FFFFFF] rounded-md w-[300px] h-[250px] p-4 relative lg:w-[400px] lg:h-[300px] shadow-lg "
-      >
-        {/* Image on top */}
-        <img
-          src={image}
-          alt="Service"
-          className="w-[70px] h-[100px] mx-auto lg:w-[70px] lg:h-[100px]"
-        />
+    <div className="h-full">
+      <div className="group h-full bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-sm hover:shadow-xl transition-all duration-300 border border-transparent hover:border-secondary/20 hover:-translate-y-1">
+        {/* Icon Container */}
+        <div className="w-16 h-16 mb-6 rounded-xl bg-secondary/10 flex items-center justify-center group-hover:bg-secondary/20 transition-colors">
+          <img
+            src={image}
+            alt={title}
+            className="w-10 h-10 object-contain"
+          />
+        </div>
 
-        <h1 className="font-Eina01-SemiBold text-[#1B1F23] mt-2 text-[20px] lg:text-[28px] lg:mt-4">
+        <h3 className="text-xl font-bold text-neutral-dark dark:text-white mb-3 group-hover:text-primary transition-colors">
           {title}
-        </h1>
+        </h3>
 
-        <p className="text-[#1B1F23] font-Eina01-Regular text-[14px] lg:text-[16px] mt-2 lg:mt-4">
+        <p className="text-gray-600 dark:text-gray-400 leading-relaxed text-sm">
           {details}
         </p>
       </div>
