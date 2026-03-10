@@ -36,9 +36,9 @@ const Navbar = ({ setScroll, home, service, faq, contact, agent }) => {
 
   return (
     <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${isScrolled || isOpen
-        ? "bg-white/90 dark:bg-gray-900/90 backdrop-blur-md shadow-sm border-b border-white/20 dark:border-gray-700"
-        : "bg-transparent"
+      className={`fixed w-full z-50 transition-all duration-500 ${isScrolled || isOpen
+        ? "bg-white/70 dark:bg-gray-900/70 backdrop-blur-xl shadow-sm border-b border-gray-200/50 dark:border-gray-700/50 py-0"
+        : "bg-transparent py-2"
         }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -54,7 +54,7 @@ const Navbar = ({ setScroll, home, service, faq, contact, agent }) => {
               <button
                 key={link.name}
                 onClick={() => handleLinkClick(link.ref)}
-                className={`text-sm font-medium transition-colors hover:text-primary ${isScrolled ? "text-neutral-dark dark:text-white" : "text-neutral-dark dark:text-white"
+                className={`text-sm font-semibold transition-all duration-300 hover:text-primary hover:-translate-y-0.5 ${isScrolled ? "text-neutral-dark dark:text-gray-200" : "text-neutral-dark dark:text-gray-200"
                   }`}
               >
                 {link.name}
@@ -66,28 +66,28 @@ const Navbar = ({ setScroll, home, service, faq, contact, agent }) => {
           <div className="hidden md:flex items-center space-x-4">
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+              className="p-2.5 rounded-full hover:bg-gray-100/50 dark:hover:bg-gray-800/50 transition-colors backdrop-blur-md"
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? <FiSun size={20} className="text-yellow-400" /> : <FiMoon size={20} className="text-gray-600 dark:text-gray-300" />}
             </button>
             <Link
               to="/login"
-              className={`text-sm font-medium transition-colors hover:text-primary ${isScrolled ? "text-neutral-dark dark:text-white" : "text-neutral-dark dark:text-white"
+              className={`text-sm font-semibold transition-all hover:text-primary hover:-translate-y-0.5 ${isScrolled ? "text-neutral-dark dark:text-gray-200" : "text-neutral-dark dark:text-gray-200"
                 }`}
             >
               Login
             </Link>
             <Link
               to="/Sign-Up"
-              className="px-6 py-2.5 rounded-full bg-primary text-white text-sm font-medium hover:bg-primary-dark transition-all shadow-lg hover:shadow-primary/30"
+              className="px-6 py-2.5 rounded-full bg-gradient-to-r from-primary to-purple-600 text-white text-sm font-semibold hover:scale-105 transition-all duration-300 shadow-[0_8px_20px_rgba(91,79,168,0.3)] hover:shadow-[0_12px_25px_rgba(91,79,168,0.5)]"
             >
               Sign Up
             </Link>
             <a
               href="/smatpay.apk"
               download
-              className="flex items-center space-x-2 px-5 py-2.5 rounded-full border border-primary/20 text-primary text-sm font-medium hover:bg-primary/5 transition-all"
+              className="flex items-center space-x-2 px-6 py-2.5 rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-neutral-dark dark:text-white text-sm font-semibold hover:scale-105 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all duration-300 shadow-md"
             >
               <Download size={16} />
               <span>App</span>
@@ -97,10 +97,10 @@ const Navbar = ({ setScroll, home, service, faq, contact, agent }) => {
           {/* Mobile Menu Button */}
           <div className="md:hidden flex items-center">
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md text-gray-700 dark:text-white hover:text-purple-600 focus:outline-none"
+              onClick={() => setIsOpen(true)}
+              className="p-2 mr-2 rounded-md text-gray-700 dark:text-white hover:text-purple-600 focus:outline-none"
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
+              <Menu size={28} />
             </button>
           </div>
         </div>
@@ -108,10 +108,20 @@ const Navbar = ({ setScroll, home, service, faq, contact, agent }) => {
 
       {/* Mobile Menu Overlay */}
       <div
-        className={`fixed inset-0 z-40 bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl md:hidden transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "translate-x-full"
+        className={`fixed inset-0 z-[60] bg-white/95 dark:bg-gray-900/95 backdrop-blur-xl md:hidden transition-transform duration-300 ease-in-out ${isOpen ? "translate-x-0" : "translate-x-full"
           }`}
         style={{ top: "0px", height: "100vh" }} // Full screen
       >
+        {/* Dedicated Close Button */}
+        <div className="absolute top-6 right-6">
+          <button
+            onClick={() => setIsOpen(false)}
+            className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors focus:outline-none"
+          >
+            <X size={28} />
+          </button>
+        </div>
+
         <div className="flex flex-col h-full pt-28 px-6 space-y-6">
           {navLinks.map((link) => (
             <button

@@ -24,7 +24,7 @@ const FAQ = () => {
       'answer': 'SmatPay offers a wide range of services including VTU top-ups, bill payments, and more. Our platform is designed to make your financial transactions as convenient as possible.'
     },
     {
-     'question': 'How can I get started with SmatPay?',
+      'question': 'How can I get started with SmatPay?',
       'answer': 'Getting started with SmatPay is easy. Simply sign up on our website or app, and you can start using our services right away. Our user-friendly interface will guide you through the process.'
     },
     {
@@ -39,8 +39,8 @@ const FAQ = () => {
       'question': 'What customer support options are available?',
       'answer': 'SmatPay provides multiple customer support options including email, live chat, and a comprehensive help center. Our team is ready to assist you with any questions or issues.'
     },
-    
-  
+
+
   ];
 
   return (
@@ -51,18 +51,18 @@ const FAQ = () => {
           <div key={i} className="border-2 border-[#7978FF] pb-4 rounded-md px-4 ">
             <div
               className="flex justify-between items-center cursor-pointer "
-              onClick={() => toggle(i)} 
+              onClick={() => toggle(i)}
             >
-              <h3 className="text-[18px] font-bold text-[#1B1F23]">{faq.question}</h3>
-              <span>{selected === i ? '-' : '+'}</span>
+              <h3 className="text-[18px] font-bold text-[#1B1F23] dark:text-white">{faq.question}</h3>
+              <span className="text-[#1B1F23] dark:text-white">{selected === i ? '-' : '+'}</span>
             </div>
             {selected === i && (
-              <p className="mt-2 text-gray-600">{faq.answer}</p>
+              <p className="mt-2 text-gray-600 dark:text-gray-300">{faq.answer}</p>
             )}
           </div>
         ))}
       </div>
-      
+
     </div>
   );
 };
