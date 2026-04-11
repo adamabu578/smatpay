@@ -7,17 +7,22 @@ import ProtectedRoutes from "./Components/utils/ProtectedRoutes.jsx";
 import ExternalDashboardRedirect from "./Components/smatpay-dashboard/Smatpay-Dashboard.jsx";
 import ResetPasswordPage from "./Components/reset-password/reset-password.jsx";
 import EmailVerificationPage from "./Components/verify-email/verify-email.jsx";
-
+import TawkMessengerReact from '@tawk.to/tawk-messenger-react';
 
 
 const App = () => {
- 
+  const tawkMessengerRef = useRef();
  
 
   return (
   
 
 <BrowserRouter>
+<TawkMessengerReact
+    propertyId="69da4aeda99cc61c37e248ee"
+    widgetId="1jlub9chd"
+    useRef={tawkMessengerRef}
+/>
 <Routes>
   <Route element={<Pages/>} path="/" />
 
