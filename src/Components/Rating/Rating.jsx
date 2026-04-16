@@ -70,8 +70,8 @@ const Rating = () => {
 
   return (
     <div ref={sectionRef} className="w-full relative py-16 lg:py-24 my-10 overflow-hidden text-white shadow-xl">
-      {/* Dynamic colorful background */}
-      <div className="absolute inset-0 bg-gradient-to-r from-primary via-purple-600 to-secondary -z-20" />
+      {/* Solid background */}
+      <div className="absolute inset-0 bg-primary -z-20" />
       <div className="absolute inset-0 bg-black/10 dark:bg-black/40 -z-10 backdrop-blur-[2px]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 flex flex-col md:flex-row justify-between items-center gap-12 text-center md:text-left">
